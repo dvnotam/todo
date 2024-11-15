@@ -14,6 +14,12 @@ function App() {
       }
   }
 
+    const kayDownSubmit = (e) => {
+        if (e.key === 'Enter') {
+            addTodo()
+        }
+    }
+
   const deleteTodo = (id) => {
       setTodos(todos.filter(todo => todo.id !== id))
   }
@@ -27,6 +33,7 @@ function App() {
                 type="text"
                 value={newTodo}
                 placeholder='Напиши задачу'
+                onKeyDown={kayDownSubmit}
                 onChange={(e) => setNewTodo(e.target.value)}
             />
             <button className="button_add-todo" onClick={addTodo}>Добавь задачу</button>
