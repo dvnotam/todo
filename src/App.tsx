@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import './App.scss'
 
+interface Todos {
+    text: string;
+    id: number
+}
 function App() {
 
-    const [ todos , setTodos ] = useState([])
-    const [ newTodo, setNewTodo ] = useState('')
-
+    const [ todos , setTodos ] = useState<Todos[]>([])
+    const [ newTodo, setNewTodo ] = useState<string>('')
 
   const addTodo = () => {
       if (newTodo.trim() !== '') {
@@ -20,7 +23,7 @@ function App() {
         }
     }
 
-  const deleteTodo = (id) => {
+  const deleteTodo = (id: number) => {
       setTodos(todos.filter(todo => todo.id !== id))
   }
 
