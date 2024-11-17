@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.scss'
 import App from './App.tsx'
 
-const rootElement = document.getElementById('root') as HTMLElement;
+const rootElement = document.getElementById('root')!;
 const root = createRoot(rootElement);
 
 root.render(

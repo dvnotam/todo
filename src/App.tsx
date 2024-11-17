@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './App.scss'
 
-interface Todos {
+interface Todo {
     text: string;
     id: number
 }
 function App() {
 
-    const [ todos , setTodos ] = useState<Todos[]>([])
+    const [ todos , setTodos ] = useState<Todo[]>([])
     const [ newTodo, setNewTodo ] = useState<string>('')
 
   const addTodo = () => {
@@ -17,7 +17,7 @@ function App() {
       }
   }
 
-    const kayDownSubmit = (e) => {
+    const kayDownSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             addTodo()
         }
