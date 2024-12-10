@@ -1,9 +1,5 @@
-<<<<<<< Updated upstream
-import React, { useState } from 'react'
-=======
 import React, { useEffect, useRef, useState } from 'react'
 import { arrayAPI } from '../api/api.tsx'
->>>>>>> Stashed changes
 import './App.scss'
 
 const src = 'https://jsonplaceholder.typicode.com/posts'

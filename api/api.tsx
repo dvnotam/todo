@@ -1,4 +1,4 @@
-git export const arrayAPI = async (src: string) => {
+export const arrayAPI = async (src: string) => {
       const response = await fetch(src);
       if (!response.ok) {
         console.log('API не отвечает');
