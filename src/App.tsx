@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { arrayAPI } from '../api/api.tsx'
 import './App.scss'
+
+const src = 'https://jsonplaceholder.typicode.com/posts'
 
 interface Todo {
     text: string;
@@ -9,6 +12,24 @@ function App() {
 
     const [ todos , setTodos ] = useState<Todo[]>([])
     const [ newTodo, setNewTodo ] = useState<string>('')
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const result = await arrayAPI(src);
+        const firstFiveItems = result.slice(0, 5).map((item: any) => ({
+          id: item.id,
+          text: item.title
+        }));
+
+        setTodos(firstFiveItems);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getData();
+  }, []);
 
   const addTodo = () => {
       if (newTodo.trim() !== '') {
