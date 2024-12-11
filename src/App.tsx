@@ -6,7 +6,7 @@ const src = 'https://jsonplaceholder.typicode.com/posts'
 
 interface Todo {
     text: string;
-    id: number
+    id: number;
 }
 
 function App() {
