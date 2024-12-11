@@ -15,7 +15,7 @@ function App() {
   const newTodo = useRef<HTMLInputElement>( null)
 
   useEffect(() => {
-    const getData = async () => {
+    const getTodos = async () => {
       try {
         const result = await arrayAPI(src);
         const firstFiveItems = result.slice(0, 5).map((item: any) => ({
@@ -29,7 +29,7 @@ function App() {
       }
     };
 
-    getData();
+    getTodos();
   }, []);
 
   const addTodo = () => {
