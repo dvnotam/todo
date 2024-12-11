@@ -8,10 +8,11 @@ interface Todo {
     text: string;
     id: number
 }
+
 function App() {
 
-    const [ todos , setTodos ] = useState<Todo[]>([])
-    const [ newTodo, setNewTodo ] = useState<string>('')
+  const [ todos , setTodos ] = useState<Todo[]>([])
+  const newTodo = useRef<HTMLInputElement>( null)
 
   useEffect(() => {
     const getData = async () => {
@@ -32,22 +33,24 @@ function App() {
   }, []);
 
   const addTodo = () => {
-      if (newTodo.trim() !== '') {
-          setTodos([...todos, {text: newTodo, id: Date.now(),}])
-          setNewTodo('')
-      }
+    if (newTodo.current) {
+      setTodos([...todos, {text: newTodo.current.value, id: Date.now(),}])
+      newTodo.current.value = ''
+    }
   }
 
-    const kayDownSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            addTodo()
-        }
+  const kayDownSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && newTodo.current) {
+      addTodo()
+      newTodo.current.value = ''
     }
+  }
 
   const deleteTodo = (id: number) => {
-      setTodos(todos.filter(todo => todo.id !== id))
+      setTodos(todos.filter((todo: any) => todo.id !== id))
   }
 
+  // @ts-ignore
   return (
     <>
         <h1>Мой список задач.</h1>
@@ -55,17 +58,16 @@ function App() {
             <input
                 className="input"
                 type="text"
-                value={newTodo}
+                ref={newTodo}
                 placeholder='Напиши задачу'
                 onKeyDown={kayDownSubmit}
-                onChange={(e) => setNewTodo(e.target.value)}
             />
             <button className="button_add-todo" onClick={addTodo}>Добавь задачу</button>
         </div>
 
         <ul className="todos_list">
-            {todos.map(todo => (
-                <li className="todo">
+            {todos.map((todo: any) => (
+                <li className="todo" >
                     {todo.text}
                     <button className="button_delete-todo" onClick={() => deleteTodo(todo.id)}>Удалить</button>
                 </li>
